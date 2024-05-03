@@ -54,63 +54,12 @@ h3 {
     color: var(--header-text-color); 
 }
 
-.game-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-.button-table {
-    flex: 1;
-}
-
-.table {
-    border-collapse: collapse;
-}
-
-.number-btn,
-.operator-btn {
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.number-btn:hover,
-.operator-btn:hover {
-    background-color: #09cad7;
-}
-
-
-.operators {
-    flex: 1;
-    padding: 10px;
-}
-
-.work-area {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.work-area .equations {
-    padding: 10px;
-    font-size: 14px;
-}
-
 .game-stats {
     display: flex;
     justify-content: space-between;
     padding-top: 5vh;
-    padding-bottom: 5vh;
     padding-right: 10vw;
     padding-left: 10vw;
-    border-bottom: 1px solid #ccc; 
 }
 
 .game-stats p {
@@ -122,10 +71,72 @@ h3 {
 }
 
 .game-container {
+    display: flex;
+    justify-content: space-between;
     padding-top: 5vh;
     padding-bottom: 5vh;
     padding-right: 10vw;
     padding-left: 10vw;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.number-btn {
+    padding: 50px;
+    font-size: 5rem;
+    border-radius: 5px;
+
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.operator-btn {
+    padding: 15px;
+    font-size: 5rem;
+    border-radius: 5px;
+
+}
+
+
+/*.number-btn,
+.operator-btn {
+    padding: 50px;
+    font-size: 5rem;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+*/
+
+.number-btn:hover,
+.operator-btn:hover {
+    background-color: #09cad7;
+    cursor: pointer;
+}
+
+.work-area {
+    width: 25vw;
+    min-width: 50px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.work-area .equations {
+    padding: 10px;
+    font-size: 14px;
 }
 
 
