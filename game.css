@@ -1,1 +1,53 @@
-sss
+body {
+    margin: 0px;
+    padding: 0px;
+    max-width: justify; 
+    color: var(--main-text-color);
+    font-family: var(--font-family);
+}
+
+header {
+    background-color: var(--main-bg-color); 
+    color: var(--header-text-color); 
+    padding: 20px; 
+    border-bottom: 2px solid var(--main-text-color); 
+}
+
+main {
+    background-color: var(--main-bg-color); 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+}
+
+footer {
+    background-color: var(--main-bg-color);
+    color: var(--footer-text-color);
+    padding: 20px;
+    border-top: 1px solid var(--main-text-color);
+}
+
+h1 {
+    font-size: 2em;
+    color: var(--header-text-color); 
+}
+
+h2 {
+    font-size: 1.5em;
+    color: var(--header-text-color); 
+}
+
+h3 {
+    font-size: 1.25em;
+    color: var(--header-text-color); 
+}
+
+button {
+    background-color: var(--main-text-color); 
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: var(--highlight-color); 
+}
