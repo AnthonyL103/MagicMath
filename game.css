@@ -121,7 +121,7 @@ h3 {
 
 .number-btn:hover,
 .operator-btn:hover {
-    background-color: #09cad7;
+    background-color: var(--background-color-1);
     cursor: pointer;
 }
 
