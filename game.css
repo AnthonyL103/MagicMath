@@ -2,21 +2,20 @@ body {
     margin: 0px;
     padding: 0px;
     max-width: justify; 
-    color: var(--main-text-color);
-    font-family: var(--font-family);
+    color: #191818;
 }
 
 header {
-    background-color: var(--main-bg-color); 
-    color: var(--header-text-color); 
+    background-color: #09cad7; 
+    color: #111111; 
     padding: 20px; 
-    border-bottom: 2px solid var(--main-text-color); 
+    border-bottom: 2px solid #141414; 
 }
 
 main {
-    background-color: var(--main-bg-color); 
+    background-color: #f9f9f3; 
     padding: 20px; 
-    border: 1px solid #ccc; 
+    border: 1px solid #161515; 
 }
 
 footer {
@@ -41,13 +40,50 @@ h3 {
     color: var(--header-text-color); 
 }
 
-button {
-    background-color: var(--main-text-color); 
-    color: white;
-    margin-top: 10px;
+.game-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-table {
+    flex: 1;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.number-btn,
+.operator-btn {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.number-btn:hover,
+.operator-btn:hover {
+    background-color: #09cad7;
+}
+
+.operators {
+    flex: 1;
     padding: 10px;
 }
 
-button:hover {
-    background-color: var(--highlight-color); 
+.work-area {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.work-area .equations {
+    padding: 10px;
+    font-size: 14px;
 }
