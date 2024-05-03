@@ -70,6 +70,7 @@ h3 {
     background-color: #09cad7;
 }
 
+
 .operators {
     flex: 1;
     padding: 10px;
@@ -86,4 +87,41 @@ h3 {
 .work-area .equations {
     padding: 10px;
     font-size: 14px;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px; 
+    border-bottom: 1px solid #ccc; 
+}
+
+.game-stats p {
+    margin: 0; 
+}
+
+.game-stats strong {
+    color: #333; 
+}
+
+.bottom-area {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px; 
+    border-bottom: 1px solid #ccc; 
+}
+
+.new-game-btn {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.new-game-btn:hover {
+    background-color: #09cad7;
 }

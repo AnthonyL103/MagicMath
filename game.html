@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="game.css">
+    <script src="game.js"></script>
     <title>Magic Math</title>
 </head>
 <body>
@@ -12,7 +13,11 @@
     </header>
     <main>
         <section>
-                
+            <div class="game-stats">
+                <p><strong>Goal:</strong> <span id="goal">0</span></p>
+                <p><strong>Wins:</strong> <span id="win-count">0</span></p>
+                <p><strong>Losses:</strong> <span id="loss-count">0</span></p>
+            </div>
             <div class="game-container">
                 <div class="button-table">
                     <table>
@@ -33,15 +38,18 @@
                         <tr>
                             <td><button class="operator-btn" data-value="+">+</button></td>
                             <td><button class="operator-btn" data-value="-">-</button></td>
-    
+                            <td><button class="operator-btn" data-value="*">*</button></td>
                         </tr>
                     </table>
                 </div>
                 
                 <div class="work-area">
-                    <h3>Work Area:</h3>
+                    <p><strong>Work Area:</strong>
                     <div class="equations"></div>
                 </div>
+            </div>
+            <div class="bottom-area">
+                <button class="new-game-btn">New Game</button>
             </div>
         </section>
     </main>
