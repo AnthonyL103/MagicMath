@@ -1,4 +1,11 @@
+:root {
+    --background-color-1: #264025;
+    --background-color-2: #e1cab2;
+}
+
 body {
+    background-color: var(--background-color-1);
+    max-height: 100vh;
     margin: 0px;
     padding: 0px;
     max-width: justify; 
@@ -6,28 +13,35 @@ body {
 }
 
 header {
-    background-color: #09cad7; 
+    background-color: var(--background-color-1);
+    height: 10vh;
+    display: flex;
+    align-items: center;
     color: #111111; 
-    padding: 20px; 
     border-bottom: 2px solid #141414; 
+
 }
 
 main {
-    background-color: #f9f9f3; 
-    padding: 20px; 
+    height: 80vh;;
+    background-color: var(--background-color-2);
     border: 1px solid #161515; 
 }
 
 footer {
-    background-color: var(--main-bg-color);
+    height: 10vh;
+    background-color: var(--background-color-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: var(--footer-text-color);
-    padding: 20px;
     border-top: 1px solid var(--main-text-color);
 }
 
 h1 {
     font-size: 2em;
-    color: var(--header-text-color); 
+    color: var(--header-text-color);
+    padding-left: 5vw;
 }
 
 h2 {
@@ -92,7 +106,10 @@ h3 {
 .game-stats {
     display: flex;
     justify-content: space-between;
-    padding: 0px; 
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    padding-right: 10vw;
+    padding-left: 10vw;
     border-bottom: 1px solid #ccc; 
 }
 
@@ -104,9 +121,17 @@ h3 {
     color: #333; 
 }
 
-.bottom-area {
+.game-container {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    padding-right: 10vw;
+    padding-left: 10vw;
+}
+
+
+.new-game-area {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0px; 
     border-bottom: 1px solid #ccc; 
 }
