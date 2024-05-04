@@ -1,10 +1,21 @@
+let currentCalculation = {
+    numbers: [],  
+    operator: null,  
+};
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function startNewGame() {
-    console.log("Script is running"); 
-    buttonNums = setRandomNumbers();
+    console.log("Starting a new game");
+
+    currentCalculation = {
+        numbers: [],
+        operator: null,
+    };
+    
+    const buttonNums = setRandomNumbers();
     setRandomGoal(buttonNums);
     document.getElementById('equations').innerHTML = '';
 }
@@ -15,9 +26,9 @@ function setRandomNumbers() {
 
     const buttonIds = ["number1", "number2", "number3", "number4"];
     const buttonNums = []; 
-    console.log("This is a test message.");
+
     buttonIds.forEach((buttonId) => {
-        const randomNum = getRandomInt(min, max); 
+        let randomNum = getRandomInt(min, max); 
         while (buttonNums.includes(randomNum)) { 
             randomNum = getRandomInt(min, max);
         }
@@ -26,6 +37,7 @@ function setRandomNumbers() {
         const button = document.getElementById(buttonId); 
         button.setAttribute("data-value", randomNum); 
         button.innerText = randomNum; 
+        button.disabled = false; 
     });
 
     return buttonNums; 
@@ -69,31 +81,79 @@ function calculateResult(numbers, operators) {
     return result;
 }
 
-// Set a random goal using a subset of unique random numbers
 function setRandomGoal(buttonNums) {
     const selectedNumbers = [];
     console.log("This is a test message2.");
-    // Get 4 unique random numbers for the operations
     for (let i = 0; i < 4; i++) {
         const randomNumber = getUniqueRandom(buttonNums);
         selectedNumbers.push(randomNumber);
     }
 
-    // Randomly select operators for the operations
     const selectedOperators = [];
-    for (let i = 0; i < 3; i++) { // 3 operators between 4 numbers
+    for (let i = 0; i < 3; i++) { 
         const randomOperator = getRandomOperator();
         selectedOperators.push(randomOperator);
     }
 
-    // Calculate the goal based on numbers and operators
     const calculatedGoal = calculateResult(selectedNumbers, selectedOperators);
 
-    // Set the goal in the HTML
     const goal = document.getElementById('goal');
     goal.textContent = calculatedGoal;
 }
 
+
+function updateWorkArea() {
+    const equationsDiv = document.getElementById('equations');
+    equationsDiv.innerHTML = ''; // Clear the work area
+
+    if (currentCalculation.operator) {
+        const numberText = `Number: ${currentCalculation.numbers.join(" ")}`;
+        const operatorText = `Operator: ${currentCalculation.operator}`;
+
+        equationsDiv.appendChild(document.createElement("p")).textContent = numberText;
+        equationsDiv.appendChild(document.createElement("p")).textContent = operatorText;
+    } else {
+        const numberText = `Numbers: ${currentCalculation.numbers.join(" ")}`;
+        equationsDiv.appendChild(document.createElement("p")).textContent = numberText;
+    }
+}
+
+function performCalculation() {
+    if (currentCalculation.numbers.length < 2 || !currentCalculation.operator) {
+        console.error("Insufficient data for calculation");
+        return;
+    }
+
+    const [num1, num2] = currentCalculation.numbers;
+    const operator = currentCalculation.operator;
+
+    let result;
+    switch (operator) {
+        case "+":
+            result = num1 + num2;
+            break;
+        case "-":
+            result = num1 - num2;
+            break;
+        case "*":
+            result = num1 * num2;
+            break;
+        default:
+            console.error("Invalid operator");
+            return;
+    }
+
+    console.log(`Calculation: ${num1} ${operator} ${num2} = ${result}`);
+
+    const resultText = `Result: ${num1} ${operator} ${num2} = ${result}`;
+    const equationsDiv = document.getElementById('equations');
+    equationsDiv.appendChild(document.createElement("p")).textContent = resultText;
+
+    currentCalculation = {
+        numbers: [],
+        operator: null,
+    };
+}
 
 document.getElementById('new-game-btn').addEventListener('click', startNewGame);
 
@@ -101,20 +161,32 @@ const newGameButton = document.getElementById("new-game-btn");
 newGameButton.addEventListener("click", startNewGame);
 
 document.querySelectorAll('.number-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        this.disabled = true;
-        const equation = document.createElement('p');
-        equation.textContent = `Selected Number: ${this.textContent}`;
-        document.getElementById('equations').appendChild(equation);
+    btn.addEventListener("click", function() {
+        if (currentCalculation.numbers.length < 2) {
+            const num = parseInt(this.textContent, 10);
+            currentCalculation.numbers.push(num);
+            updateWorkArea(); 
+            this.disabled = true; 
+        }
+
+        if (currentCalculation.numbers.length === 2 && currentCalculation.operator) {
+            performCalculation();
+        }
     });
 });
 
 document.querySelectorAll('.operator-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const equation = document.createElement('p');
-        equation.textContent = `Selected Operator: ${this.textContent}`;
-        document.getElementById('equations').appendChild(equation);
+    btn.addEventListener("click", function() {
+        if (!currentCalculation.operator) {  
+            currentCalculation.operator = this.textContent;
+            updateWorkArea(); // Refresh the work area display
+        }
+
+        // If two numbers and one operator, perform the calculation
+        if (currentCalculation.numbers.length === 2 && currentCalculation.operator) {
+            performCalculation();
+        }
     });
 });
 
-startNewGame(); 
+startNewGame();
