@@ -127,21 +127,10 @@ function performCalculation() {
     const [num1, num2] = currentCalculation.numbers;
     const operator = currentCalculation.operator;
 
+
     let result;
-    switch (operator) {
-        case "+":
-            result = num1 + num2;
-            break;
-        case "-":
-            result = num1 - num2;
-            break;
-        case "*":
-            result = num1 * num2;
-            break;
-        default:
-            console.error("Invalid operator");
-            return;
-    }
+
+    result = calculateResult([num1, num2], operator);
 
     console.log(`Calculation: ${num1} ${operator} ${num2} = ${result}`);
 
