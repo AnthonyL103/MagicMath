@@ -3,6 +3,7 @@ function getRandomInt(min, max) {
 }
 
 function startNewGame() {
+    console.log("Script is running"); 
     const numbers = Array.from({length: 4}, () => getRandomInt(1, 10));
     numbers.forEach((num, index) => {
         const btn = document.getElementById('number' + (index + 1));
@@ -22,7 +23,7 @@ function setRandomNumbers() {
 
     const buttonIds = ["number1", "number2", "number3", "number4"];
     const buttonNums = []; 
-
+    console.log("This is a test message.");
     buttonIds.forEach((buttonId) => {
         const randomNum = getRandomInt(min, max); 
         while (buttonNums.includes(randomNum)) { 
