@@ -104,7 +104,7 @@ function setRandomGoal(buttonNums) {
 
 function updateWorkArea() {
     const equationsDiv = document.getElementById('equations');
-    equationsDiv.innerHTML = ''; // Clear the work area
+    //equationsDiv.innerHTML = ''; // Clear the work area
 
     if (currentCalculation.operator) {
         const numberText = `Number: ${currentCalculation.numbers.join(" ")}`;
