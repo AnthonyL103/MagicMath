@@ -2,11 +2,25 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function startNewGame() {
+    const numbers = Array.from({length: 4}, () => getRandomInt(1, 10));
+    numbers.forEach((num, index) => {
+        const btn = document.getElementById('number' + (index + 1));
+        btn.textContent = num;
+        btn.disabled = false;
+    });
+
+    const goal = document.getElementById('goal');
+    goal.textContent = numbers.reduce((a, b) => a + b);
+
+    document.getElementById('equations').innerHTML = '';
+}
+
 function setRandomNumbers() {
     const min = 1;
     const max = 10;
 
-    const buttonIds = ["button1", "button2", "button3", "button4"];
+    const buttonIds = ["number1", "number2", "number3", "number4"];
     const buttonNums = []; 
 
     buttonIds.forEach((buttonId) => {
@@ -86,13 +100,27 @@ function setRandomGoal(buttonNums) {
     document.getElementById("goal").innerText = calculatedGoal
 }
 
-function startNewGame() {
-    const buttonNums = setRandomNumbers(); // Randomize button numbers
-    setRandomGoal(buttonNums); // Set the goal
-}
+
+document.getElementById('new-game-btn').addEventListener('click', startNewGame);
 
 const newGameButton = document.getElementById("new-game-btn");
 newGameButton.addEventListener("click", startNewGame);
 
+document.querySelectorAll('.number-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        this.disabled = true;
+        const equation = document.createElement('p');
+        equation.textContent = `Selected Number: ${this.textContent}`;
+        document.getElementById('equations').appendChild(equation);
+    });
+});
+
+document.querySelectorAll('.operator-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const equation = document.createElement('p');
+        equation.textContent = `Selected Operator: ${this.textContent}`;
+        document.getElementById('equations').appendChild(equation);
+    });
+});
 
 startNewGame(); 
