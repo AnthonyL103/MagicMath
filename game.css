@@ -80,12 +80,12 @@ h3 {
 }
 
 .number-board {
-    background-color: red;
+    background-color: var(--background-color1);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
 
 }
 
@@ -105,8 +105,8 @@ h3 {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
     padding-top: 4px;
     padding-bottom: 4px;
 }
