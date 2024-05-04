@@ -4,16 +4,8 @@ function getRandomInt(min, max) {
 
 function startNewGame() {
     console.log("Script is running"); 
-    const numbers = Array.from({length: 4}, () => getRandomInt(1, 10));
-    numbers.forEach((num, index) => {
-        const btn = document.getElementById('number' + (index + 1));
-        btn.textContent = num;
-        btn.disabled = false;
-    });
-
-    const goal = document.getElementById('goal');
-    goal.textContent = numbers.reduce((a, b) => a + b);
-
+    buttonNums = setRandomNumbers();
+    setRandomGoal(buttonNums);
     document.getElementById('equations').innerHTML = '';
 }
 
@@ -80,7 +72,7 @@ function calculateResult(numbers, operators) {
 // Set a random goal using a subset of unique random numbers
 function setRandomGoal(buttonNums) {
     const selectedNumbers = [];
-
+    console.log("This is a test message2.");
     // Get 4 unique random numbers for the operations
     for (let i = 0; i < 4; i++) {
         const randomNumber = getUniqueRandom(buttonNums);
@@ -98,7 +90,8 @@ function setRandomGoal(buttonNums) {
     const calculatedGoal = calculateResult(selectedNumbers, selectedOperators);
 
     // Set the goal in the HTML
-    document.getElementById("goal").innerText = calculatedGoal
+    const goal = document.getElementById('goal');
+    goal.textContent = calculatedGoal;
 }
 
 
