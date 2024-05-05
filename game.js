@@ -1,3 +1,4 @@
+let globalGoal;
 let currentCalculation = {
     numbers: [],  
     operator: null,  
@@ -96,27 +97,13 @@ function setRandomGoal(buttonNums) {
     }
 
     const calculatedGoal = calculateResult(selectedNumbers, selectedOperators);
-
+    globalGoal = calculatedGoal; 
     const goal = document.getElementById('goal');
     goal.textContent = calculatedGoal;
 }
 
 
-function updateWorkArea() {
-    const equationsDiv = document.getElementById('equations');
-    //equationsDiv.innerHTML = ''; // Clear the work area
 
-    if (currentCalculation.operator) {
-        const numberText = `Number: ${currentCalculation.numbers.join(" ")}`;
-        const operatorText = `Operator: ${currentCalculation.operator}`;
-
-        equationsDiv.appendChild(document.createElement("p")).textContent = numberText;
-        equationsDiv.appendChild(document.createElement("p")).textContent = operatorText;
-    } else {
-        const numberText = `Numbers: ${currentCalculation.numbers.join(" ")}`;
-        equationsDiv.appendChild(document.createElement("p")).textContent = numberText;
-    }
-}
 
 function performCalculation() {
     if (currentCalculation.numbers.length < 2 || !currentCalculation.operator) {
@@ -132,16 +119,25 @@ function performCalculation() {
 
     result = calculateResult([num1, num2], operator);
 
+    
+
     console.log(`Calculation: ${num1} ${operator} ${num2} = ${result}`);
 
     const resultText = `Result: ${num1} ${operator} ${num2} = ${result}`;
     const equationsDiv = document.getElementById('equations');
     equationsDiv.appendChild(document.createElement("p")).textContent = resultText;
 
+    if (result === globalGoal) {
+        const winText = "Congratulations! You Win!";
+        equationsDiv.appendChild(document.createElement("p")).textContent = winText;
+    }
+    
     currentCalculation = {
-        numbers: [],
+        numbers: [ ],
         operator: null,
     };
+
+    currentCalculation.numbers.push(result);
 }
 
 document.getElementById('new-game-btn').addEventListener('click', startNewGame);
@@ -154,12 +150,12 @@ document.querySelectorAll('.number-btn').forEach(btn => {
         if (currentCalculation.numbers.length < 2) {
             const num = parseInt(this.textContent, 10);
             currentCalculation.numbers.push(num);
-            updateWorkArea(); 
             this.disabled = true; 
         }
 
         if (currentCalculation.numbers.length === 2 && currentCalculation.operator) {
             performCalculation();
+            updateWorkArea(); 
         }
     });
 });
@@ -168,12 +164,13 @@ document.querySelectorAll('.operator-btn').forEach(btn => {
     btn.addEventListener("click", function() {
         if (!currentCalculation.operator) {  
             currentCalculation.operator = this.textContent;
-            updateWorkArea(); // Refresh the work area display
+             // Refresh the work area display
         }
 
         // If two numbers and one operator, perform the calculation
         if (currentCalculation.numbers.length === 2 && currentCalculation.operator) {
             performCalculation();
+            updateWorkArea();
         }
     });
 });
