@@ -1,4 +1,5 @@
 let globalGoal;
+let globalWins = 0;
 let currentCalculation = {
     numbers: [],  
     operator: null,  
@@ -130,8 +131,11 @@ function performCalculation() {
     if (result === globalGoal) {
         const winText = "Congratulations! You Win!";
         equationsDiv.appendChild(document.createElement("p")).textContent = winText;
+        globalWins += 1;
+        const wins = document.getElementById('win-count');
+        wins.textContent = globalWins;
     }
-    
+
     currentCalculation = {
         numbers: [ ],
         operator: null,
