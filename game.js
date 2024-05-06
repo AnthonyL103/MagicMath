@@ -1,5 +1,6 @@
 let globalGoal;
 let globalWins = 0;
+let globalLoss = 0;
 let currentCalculation = {
     numbers: [],  
     operator: null,  
