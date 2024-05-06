@@ -216,7 +216,7 @@ document.querySelectorAll('.operator-btn').forEach(btn => {
     btn.addEventListener("click", function() {
         if (!currentCalculation.operator) {  
             currentCalculation.operator = this.textContent;
-             // Refresh the work area display
+            //this.disabled = true;
         }
 
         // If two numbers and one operator, perform the calculation
