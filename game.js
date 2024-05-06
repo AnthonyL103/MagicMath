@@ -104,6 +104,20 @@ function setRandomGoal(buttonNums) {
     goal.textContent = calculatedGoal;
 }
 
+function checkempty() {
+    const buttonIds = ["number1", "number2", "number3", "number4"]; // List of button IDs
+    let emptyCount = 0;
+
+    // Loop through all button IDs and count how many have empty inner text
+    buttonIds.forEach((id) => {
+        const button = document.getElementById(id);
+        if (button && button.innerText.trim() === "") {
+            emptyCount++; // Increment the empty count if the button is empty
+        }
+    });
+
+    return emptyCount;
+}
 
 
 
@@ -116,12 +130,9 @@ function performCalculation() {
     const [num1, num2] = currentCalculation.numbers;
     const operator = currentCalculation.operator;
 
-
     let result;
 
     result = calculateResult([num1, num2], operator);
-
-    
 
     console.log(`Calculation: ${num1} ${operator} ${num2} = ${result}`);
 
@@ -137,12 +148,48 @@ function performCalculation() {
         wins.textContent = globalWins;
     }
 
+    const emptyCount = checkempty();
+
+    if (result != globalGoal && emptyCount >= 3) {
+        const equationsDiv = document.getElementById("equations");
+        const lossText = "Game Over! Too many empty buttons.";
+        equationsDiv.appendChild(document.createElement("p")).textContent = lossText;
+
+        globalLoss += 1; // Increment global loss count
+        const loss = document.getElementById("loss-count");
+        loss.textContent = globalLoss; // Update loss count in UI
+
+    }
+    
+    /*uses find index to find the index of the correct id of button with the same value as num 1 and num2 which where declared in current
+    calculation, making it so we know what buttons where pressed for this round of calculation */
+    const num2Index = ["number1", "number2", "number3", "number4"].findIndex(id => 
+        document.getElementById(id).innerText == num2.toString()
+    );
+
+    const num1Index = ["number1", "number2", "number3", "number4"].findIndex(id => 
+        document.getElementById(id).innerText == num1.toString()
+    );
+
+    //declares the variables representing the first and second buttons and adds 1 to each as indexing starts from 0
+    const secondButton = document.getElementById(`number${num2Index + 1}`);
+    const firstButton = document.getElementById(`number${num1Index + 1}`);
+    
+    // updates second buttons text based on the result of the first
+    secondButton.innerText = result;
+    //renables second button as it was declared as disabled when clicked in the event listener 
+    secondButton.disabled = false;
+    firstButton.innerText = ""; 
+    //disables the first button
+    firstButton.disabled = true; 
+
+    // Reset the current calculation for next round 
     currentCalculation = {
-        numbers: [ ],
+        numbers: [],
         operator: null,
     };
-
-    currentCalculation.numbers.push(result);
+    //dont need this becomes the button becomes the product 
+    //currentCalculation.numbers.push(result);
 }
 
 document.getElementById('new-game-btn').addEventListener('click', startNewGame);
