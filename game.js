@@ -10,6 +10,10 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function updateMessage(message) {
+    document.getElementById('message').textContent = message;
+}
+
 function startNewGame() {
     console.log("Starting a new game");
 
@@ -21,6 +25,9 @@ function startNewGame() {
     const buttonNums = setRandomNumbers();
     setRandomGoal(buttonNums);
     document.getElementById('equations').innerHTML = '';
+
+    updateMessage("Let's play! Select a number.");
+
 }
 
 function setRandomNumbers() {
@@ -170,6 +177,7 @@ function performCalculation() {
         const loss = document.getElementById("loss-count");
         loss.textContent = globalLoss; // Update loss count in UI
 
+
     }
 
     
@@ -202,36 +210,52 @@ function performCalculation() {
     };
     //dont need this becomes the button becomes the product 
     //currentCalculation.numbers.push(result);
+
+    if (result === globalGoal) {
+        updateMessage("Congratulations! You Win!");
+    } else if (result !== globalGoal && emptyCount >= 2) {
+        updateMessage("Game Over! Better luck next time.");
+    } else {
+        updateMessage("Keep going! Select the next number.");
+    }
 }
 
 // Operator Butotn Disable
 
 document.querySelectorAll('.operator-btn').forEach(btn => {
     btn.addEventListener("click", function() {
+
         if (!currentCalculation.operator) {
             currentCalculation.operator = this.textContent;
             this.disabled = true;  // Disable the button after clicking
+        }
+
+        if (currentCalculation.numbers.length === 1 && currentCalculation.operator) {
+            updateMessage("Select another number!");
         }
 
         if (currentCalculation.numbers.length === 2 && currentCalculation.operator) {
             performCalculation();
             updateWorkArea();
         }
+
     });
 });
-    
-
-document.getElementById('new-game-btn').addEventListener('click', startNewGame);
 
 const newGameButton = document.getElementById("new-game-btn");
 newGameButton.addEventListener("click", startNewGame);
 
 document.querySelectorAll('.number-btn').forEach(btn => {
     btn.addEventListener("click", function() {
+
         if (currentCalculation.numbers.length < 2) {
             const num = parseInt(this.textContent, 10);
             currentCalculation.numbers.push(num);
             this.disabled = true; 
+        }
+
+        if (currentCalculation.numbers.length === 1) {
+            updateMessage("Select an operator!");
         }
 
         if (currentCalculation.numbers.length === 2 && currentCalculation.operator) {
@@ -241,19 +265,6 @@ document.querySelectorAll('.number-btn').forEach(btn => {
     });
 });
 
-document.querySelectorAll('.operator-btn').forEach(btn => {
-    btn.addEventListener("click", function() {
-        if (!currentCalculation.operator) {  
-            currentCalculation.operator = this.textContent;
-            //this.disabled = true;
-        }
-
-        // If two numbers and one operator, perform the calculation
-        if (currentCalculation.numbers.length === 2 && currentCalculation.operator) {
-            performCalculation();
-            updateWorkArea();
-        }
-    });
-});
+document.getElementById('new-game-btn').addEventListener('click', startNewGame);
 
 startNewGame();
