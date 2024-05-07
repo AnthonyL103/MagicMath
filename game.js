@@ -140,6 +140,17 @@ function performCalculation() {
     const equationsDiv = document.getElementById('equations');
     equationsDiv.appendChild(document.createElement("p")).textContent = resultText;
 
+    // Reset operators after performing calculation
+    document.querySelectorAll('.operator-btn').forEach(btn => {
+        btn.disabled = false;  // Re-enable all operator buttons
+    });
+
+    // Reset the current calculation state
+    currentCalculation = {
+        numbers: [],
+        operator: null
+    };
+
     if (result === globalGoal) {
         const winText = "Congratulations! You Win!";
         equationsDiv.appendChild(document.createElement("p")).textContent = winText;
@@ -150,16 +161,17 @@ function performCalculation() {
 
     const emptyCount = checkempty();
 
-    if (result != globalGoal && emptyCount >= 3) {
+    if (result != globalGoal && emptyCount >= 2) {
         const equationsDiv = document.getElementById("equations");
         const lossText = "Game Over! Too many empty buttons.";
         equationsDiv.appendChild(document.createElement("p")).textContent = lossText;
 
-        globalLoss += 1; // Increment global loss count
+        globalLoss++; // Increment global loss count
         const loss = document.getElementById("loss-count");
         loss.textContent = globalLoss; // Update loss count in UI
 
     }
+
     
     /*uses find index to find the index of the correct id of button with the same value as num 1 and num2 which where declared in current
     calculation, making it so we know what buttons where pressed for this round of calculation */
@@ -191,6 +203,23 @@ function performCalculation() {
     //dont need this becomes the button becomes the product 
     //currentCalculation.numbers.push(result);
 }
+
+// Operator Butotn Disable
+
+document.querySelectorAll('.operator-btn').forEach(btn => {
+    btn.addEventListener("click", function() {
+        if (!currentCalculation.operator) {
+            currentCalculation.operator = this.textContent;
+            this.disabled = true;  // Disable the button after clicking
+        }
+
+        if (currentCalculation.numbers.length === 2 && currentCalculation.operator) {
+            performCalculation();
+            updateWorkArea();
+        }
+    });
+});
+    
 
 document.getElementById('new-game-btn').addEventListener('click', startNewGame);
 
