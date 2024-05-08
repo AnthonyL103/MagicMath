@@ -187,7 +187,7 @@ function performCalculation() {
 
     if (result != globalGoal && emptyCount >= 2) {
         const equationsDiv = document.getElementById("equations");
-        const lossText = "Game Over! Too many empty buttons.";
+        const lossText = "Game Over! You ran out of numbers.";
         equationsDiv.appendChild(document.createElement("p")).textContent = lossText;
 
         globalLoss++; // Increment global loss count
