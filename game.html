@@ -24,35 +24,38 @@ Date: 5/8/2024
                 <p><strong>Wins:</strong> <span id="win-count">0</span></p>
                 <p><strong>Losses:</strong> <span id="loss-count">0</span></p>
             </div>
-            <!--declares game game conttiner div that contains all the number buttons-->
+            <!--declares game game container div that contains number buttons grid, operators grid, and work area to display equations-->
             <div class="game-container">
+                <!--number button grid-->
                 <div class="number-board">
                     <button id="number1" class="number-btn">1</button>
                     <button id="number2" class="number-btn">2</button>
                     <button id="number3" class="number-btn">3</button>
                     <button id="number4" class="number-btn">4</button>
-                    
                 </div>
+                <!--operator button grid-->
                 <div id="operators" class="operators">
                     <button id="plus" class="operator-btn">+</button>
                     <button id="minus" class="operator-btn">-</button>
                     <button id="multiply" class="operator-btn">*</button>
                 </div>
-                
+                <!--work area to display equations-->
                 <div id="work-area" class="work-area">
                     <p><strong>Work Area</strong>
                     <div id="equations"></div>
                 </div>
-
             </div>
+            <!--declares message box that displays in game messages-->
             <div class="message-box">
                 <p id="message">Let's play! Select a number.</p>
             </div>
+            <!--declares new game area that contains the new game button-->
             <div class="new-game-area">
                 <button id="new-game-btn">New Game</button>
             </div>
         </section>
     </main>
+    <!--declares footer for the website-->
     <footer class="bg-light">
         <p>&copy; Anthony Li & Zane Garvey- Web Development (CS 290), Oregon State University</p>
     </footer>
