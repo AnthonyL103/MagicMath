@@ -1,3 +1,11 @@
+/*Web Development project #6
+Prompt: Magic Math Game
+Team Members: Zane Garvey & Anthony Li
+Date: 5/8/2024
+*/
+
+
+
 let globalGoal;
 let globalWins = 0;
 let globalLoss = 0;
